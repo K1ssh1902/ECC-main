@@ -1,3 +1,8 @@
+---
+paths:
+  - "rules/**"
+---
+
 # Rules
 ## Structure
 
