@@ -49,13 +49,13 @@ function withIsolatedHome(fn) {
     return fn(isolatedHome);
   } finally {
     if (originalHome !== undefined) {
-      process.env.HOME = originalHome;
+      if (originalHome === undefined) { delete process.env.HOME; } else { process.env.HOME = originalHome; }
     } else {
       delete process.env.HOME;
     }
 
     if (originalUserProfile !== undefined) {
-      process.env.USERPROFILE = originalUserProfile;
+      if (originalUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = originalUserProfile; }
     } else {
       delete process.env.USERPROFILE;
     }
@@ -1325,8 +1325,8 @@ function runTests() {
       assert.strictEqual(result.name, 'npm', 'Should fall through to npm default');
       assert.strictEqual(result.source, 'default', 'Source should be default');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       if (origPM !== undefined) process.env.CLAUDE_PACKAGE_MANAGER = origPM;
 
       delete require.cache[require.resolve('../../scripts/lib/package-manager')];
@@ -1370,8 +1370,8 @@ function runTests() {
       assert.ok(result.config, 'Should include config object');
       assert.strictEqual(result.config.lockFile, 'pnpm-lock.yaml', 'Config should match pnpm');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       if (origPM !== undefined) process.env.CLAUDE_PACKAGE_MANAGER = origPM;
 
       delete require.cache[require.resolve('../../scripts/lib/package-manager')];
@@ -1411,8 +1411,8 @@ function runTests() {
       } catch (_err) {
         /* best-effort */
       }
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      if (savedHome === undefined) { delete process.env.HOME; } else { process.env.HOME = savedHome; }
+      if (savedProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = savedProfile; }
       delete require.cache[require.resolve('../../scripts/lib/package-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });

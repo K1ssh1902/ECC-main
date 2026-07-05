@@ -72,12 +72,12 @@ function runTests() {
       if (originalHome === undefined) {
         delete process.env.HOME;
       } else {
-        process.env.HOME = originalHome;
+        if (originalHome === undefined) { delete process.env.HOME; } else { process.env.HOME = originalHome; }
       }
       if (originalUserProfile === undefined) {
         delete process.env.USERPROFILE;
       } else {
-        process.env.USERPROFILE = originalUserProfile;
+        if (originalUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = originalUserProfile; }
       }
     }
   })) passed++; else failed++;
@@ -94,12 +94,12 @@ function runTests() {
       if (originalHome === undefined) {
         delete process.env.HOME;
       } else {
-        process.env.HOME = originalHome;
+        if (originalHome === undefined) { delete process.env.HOME; } else { process.env.HOME = originalHome; }
       }
       if (originalUserProfile === undefined) {
         delete process.env.USERPROFILE;
       } else {
-        process.env.USERPROFILE = originalUserProfile;
+        if (originalUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = originalUserProfile; }
       }
     }
   })) passed++; else failed++;

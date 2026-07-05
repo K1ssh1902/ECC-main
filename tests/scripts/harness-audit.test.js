@@ -612,7 +612,7 @@ function runTests() {
         if (originalHome === undefined) {
           delete process.env.HOME;
         } else {
-          process.env.HOME = originalHome;
+          if (originalHome === undefined) { delete process.env.HOME; } else { process.env.HOME = originalHome; }
         }
       }
     } finally {
@@ -645,7 +645,7 @@ function runTests() {
         if (originalHome === undefined) {
           delete process.env.HOME;
         } else {
-          process.env.HOME = originalHome;
+          if (originalHome === undefined) { delete process.env.HOME; } else { process.env.HOME = originalHome; }
         }
       }
     } finally {

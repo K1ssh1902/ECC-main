@@ -1055,9 +1055,9 @@ src/main.ts
   })) passed++; else failed++;
 
   // Cleanup — restore both HOME and USERPROFILE (Windows)
-  process.env.HOME = origHome;
+  if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
   if (origUserProfile !== undefined) {
-    process.env.USERPROFILE = origUserProfile;
+    if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
   } else {
     delete process.env.USERPROFILE;
   }
@@ -1233,8 +1233,8 @@ src/main.ts
       assert.strictEqual(result.total, 0, 'Total should be 0');
       assert.strictEqual(result.hasMore, false, 'hasMore should be false');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       cleanup(tmpDir);
@@ -1259,8 +1259,8 @@ src/main.ts
       const result = freshSM.getSessionById('anything');
       assert.strictEqual(result, null, 'Should return null when sessions dir does not exist');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       cleanup(tmpDir);
@@ -1320,8 +1320,8 @@ src/main.ts
       assert.strictEqual(nonEmpty.hasContent, true, 'Non-empty file should have hasContent: true');
       assert.strictEqual(empty.hasContent, false, 'Empty file should have hasContent: false');
     } finally {
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      if (savedHome === undefined) { delete process.env.HOME; } else { process.env.HOME = savedHome; }
+      if (savedProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = savedProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1401,8 +1401,8 @@ src/main.ts
       assert.ok(result.sessions[0].filename === realFile,
         `Should return the real file, got: ${result.sessions[0].filename}`);
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1437,8 +1437,8 @@ src/main.ts
       assert.strictEqual(result, null,
         'Should return null when matching session file is a broken symlink');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1500,8 +1500,8 @@ src/main.ts
       assert.strictEqual(result.sessions[0].filename, realFile,
         `Should return the real file. Got: ${result.sessions[0].filename}`);
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1657,9 +1657,9 @@ src/main.ts
 
   // Cleanup test environment for Rounds 95-98 that needed sessions
   // (Round 98: parseSessionFilename below doesn't need sessions)
-  process.env.HOME = origHome2;
+  if (origHome2 === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome2; }
   if (origUserProfile2 !== undefined) {
-    process.env.USERPROFILE = origUserProfile2;
+    if (origUserProfile2 === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile2; }
   } else {
     delete process.env.USERPROFILE;
   }
@@ -1862,8 +1862,8 @@ file.ts
       assert.strictEqual(multiArrResult.limit, 50,
         'Multi-element array [1,2] coerces to NaN → fallback to 50');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1897,8 +1897,8 @@ file.ts
       assert.strictEqual(result.sessions[0].shortId, 'abcd1234',
         'The one valid session should have correct shortId');
     } finally {
-      process.env.HOME = origHome;
-      process.env.USERPROFILE = origUserProfile;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
+      if (origUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = origUserProfile; }
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -2447,7 +2447,7 @@ file.ts
       assert.strictEqual(noResult, null,
         'Non-matching date should return null');
     } finally {
-      process.env.HOME = origHome;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
       if (origUserProfile !== undefined) process.env.USERPROFILE = origUserProfile;
       else delete process.env.USERPROFILE;
       if (origDir) process.env.CLAUDE_DIR = origDir;
@@ -2585,7 +2585,7 @@ file.ts
       assert.strictEqual(nullDate.sessions.length, 1,
         'null date skips filter and returns all sessions');
     } finally {
-      process.env.HOME = origHome;
+      if (origHome === undefined) { delete process.env.HOME; } else { process.env.HOME = origHome; }
       if (origUserProfile !== undefined) process.env.USERPROFILE = origUserProfile;
       else delete process.env.USERPROFILE;
       if (origDir) process.env.CLAUDE_DIR = origDir;

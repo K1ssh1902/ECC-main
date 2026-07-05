@@ -21,6 +21,16 @@ const origUserProfile = process.env.USERPROFILE;
 process.env.HOME = tmpHome;
 process.env.USERPROFILE = tmpHome; // Windows: os.homedir() uses USERPROFILE
 
+// Assigning undefined to process.env stores the string "undefined", which
+// later resolves to a literal ./undefined directory — always guard restores.
+function restoreEnvVar(name, value) {
+  if (value === undefined) {
+    delete process.env[name];
+  } else {
+    process.env[name] = value;
+  }
+}
+
 const aliases = require('../../scripts/lib/session-aliases');
 
 // Test helper
@@ -827,12 +837,8 @@ function runTests() {
   })) passed++; else failed++;
 
   // Cleanup — restore both HOME and USERPROFILE (Windows)
-  process.env.HOME = origHome;
-  if (origUserProfile !== undefined) {
-    process.env.USERPROFILE = origUserProfile;
-  } else {
-    delete process.env.USERPROFILE;
-  }
+  restoreEnvVar('HOME', origHome);
+  restoreEnvVar('USERPROFILE', origUserProfile);
   try {
     fs.rmSync(tmpHome, { recursive: true, force: true });
   } catch {
@@ -1022,8 +1028,8 @@ function runTests() {
         `Should return save failure error, got: ${result.error}`);
     } finally {
       try { fs.chmodSync(isoClaudeDir, 0o755); } catch { /* best-effort */ }
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      restoreEnvVar('HOME', savedHome);
+      restoreEnvVar('USERPROFILE', savedProfile);
       delete require.cache[require.resolve('../../scripts/lib/session-aliases')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1064,8 +1070,8 @@ function runTests() {
         `Should return delete failure error, got: ${result.error}`);
     } finally {
       try { fs.chmodSync(isoClaudeDir, 0o755); } catch { /* best-effort */ }
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      restoreEnvVar('HOME', savedHome);
+      restoreEnvVar('USERPROFILE', savedProfile);
       delete require.cache[require.resolve('../../scripts/lib/session-aliases')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1109,8 +1115,8 @@ function runTests() {
         'Should report remove-me in removedAliases');
     } finally {
       try { fs.chmodSync(isoClaudeDir, 0o755); } catch { /* best-effort */ }
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      restoreEnvVar('HOME', savedHome);
+      restoreEnvVar('USERPROFILE', savedProfile);
       delete require.cache[require.resolve('../../scripts/lib/session-aliases')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1146,8 +1152,8 @@ function runTests() {
         `Should return save failure error, got: ${result.error}`);
     } finally {
       try { fs.chmodSync(isoClaudeDir, 0o755); } catch { /* best-effort */ }
-      process.env.HOME = savedHome;
-      process.env.USERPROFILE = savedProfile;
+      restoreEnvVar('HOME', savedHome);
+      restoreEnvVar('USERPROFILE', savedProfile);
       delete require.cache[require.resolve('../../scripts/lib/session-aliases')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       fs.rmSync(isoHome, { recursive: true, force: true });
@@ -1263,8 +1269,8 @@ function runTests() {
       // Backup should still exist (restore also failed, so backup was not consumed)
       assert.ok(fs.existsSync(backupPath), 'Backup should still exist after double failure');
     } finally {
-      process.env.HOME = origH;
-      process.env.USERPROFILE = origP;
+      restoreEnvVar('HOME', origH);
+      restoreEnvVar('USERPROFILE', origP);
       delete require.cache[require.resolve('../../scripts/lib/session-aliases')];
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       try { fs.chmodSync(claudeDir, 0o755); } catch { /* best-effort */ }

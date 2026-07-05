@@ -47,13 +47,13 @@ function withHome(homeDir, fn) {
     fn();
   } finally {
     if (typeof previousHome === 'string') {
-      process.env.HOME = previousHome;
+      if (previousHome === undefined) { delete process.env.HOME; } else { process.env.HOME = previousHome; }
     } else {
       delete process.env.HOME;
     }
 
     if (typeof previousUserProfile === 'string') {
-      process.env.USERPROFILE = previousUserProfile;
+      if (previousUserProfile === undefined) { delete process.env.USERPROFILE; } else { process.env.USERPROFILE = previousUserProfile; }
     } else {
       delete process.env.USERPROFILE;
     }
