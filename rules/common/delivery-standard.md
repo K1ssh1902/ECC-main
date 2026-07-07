@@ -3,6 +3,8 @@
 > This rule loads for every session and every Anthropic model (Haiku, Sonnet, Opus, Fable).
 > Smaller/faster models: follow these steps **literally and in order** — they substitute for
 > deeper internal reasoning. Do not skip steps to move faster.
+> This is the process layer; the judgment lives in [legacy.md](legacy.md) and the
+> per-task-type moves live in [action-playbooks.md](action-playbooks.md).
 
 ## The Six Steps
 
@@ -26,7 +28,9 @@
 
 5. **VERIFY** — Before claiming success, exercise the actual outcome: run the tests, start the
    app, open the page, run the script. "It compiles" and "it works" are different claims. Never
-   report something as done that was not observed working.
+   report something as done that was not observed working. What "verified" concretely means per
+   artifact type is the Verification Table in [action-playbooks.md](action-playbooks.md) —
+   hold every claim of "done" to that table.
 
 6. **REPORT** — Lead with the outcome, in plain sentences. State what was done, what was
    verified, what failed (with the real error), and what remains. Never hide a failure or a

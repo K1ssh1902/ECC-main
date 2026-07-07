@@ -11,7 +11,12 @@ Rules are organized into a **common** layer plus **language-specific** directori
 ```
 rules/
 ├── common/          # Language-agnostic principles (always install)
+│   ├── legacy.md               # The Legacy — judgment standard for every model
+│   ├── delivery-standard.md    # The six-step working process
+│   ├── action-playbooks.md     # The Playbook — per-task-type action recipes
 │   ├── coding-style.md
+│   ├── code-review.md
+│   ├── development-workflow.md
 │   ├── git-workflow.md
 │   ├── testing.md
 │   ├── performance.md
