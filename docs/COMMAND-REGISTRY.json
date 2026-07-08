@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "totalCommands": 79,
+  "totalCommands": 81,
   "commands": [
     {
       "command": "aside",
@@ -37,6 +37,18 @@
       "allAgents": [],
       "skills": [],
       "path": "commands/checkpoint.md"
+    },
+    {
+      "command": "chief",
+      "description": "Chief Orchestrator — portfolio control plane above NightShift and future autonomous modes. Intake objectives, charter and dispatch missions, supervise their telemetry, and deliver executive reports.",
+      "type": "orchestration",
+      "primaryAgents": [],
+      "allAgents": [],
+      "skills": [
+        "chief-orchestrator",
+        "night-shift"
+      ],
+      "path": "commands/chief.md"
     },
     {
       "command": "code-review",
@@ -491,6 +503,34 @@
       "path": "commands/multi-workflow.md"
     },
     {
+      "command": "night-shift",
+      "description": "Enter autonomous night-shift mode — plan, prioritize, delegate to subagents, verify, and iterate toward a long-term goal with persistent state and credit discipline.",
+      "type": "orchestration",
+      "primaryAgents": [
+        "architect",
+        "build-error-resolver",
+        "code-reviewer"
+      ],
+      "allAgents": [
+        "architect",
+        "build-error-resolver",
+        "code-reviewer",
+        "code-simplifier",
+        "doc-updater",
+        "e2e-runner",
+        "night-shift-assessor",
+        "performance-optimizer",
+        "planner",
+        "refactor-cleaner",
+        "security-reviewer",
+        "tdd-guide"
+      ],
+      "skills": [
+        "night-shift"
+      ],
+      "path": "commands/night-shift.md"
+    },
+    {
       "command": "plan-prd",
       "description": "Generate a lean, problem-first PRD and hand off to /plan for implementation planning.",
       "type": "testing",
@@ -864,7 +904,7 @@
     "byType": {
       "build": 2,
       "general": 8,
-      "orchestration": 6,
+      "orchestration": 8,
       "planning": 2,
       "refactoring": 1,
       "review": 9,
@@ -880,35 +920,35 @@
         "count": 2
       },
       {
+        "agent": "planner",
+        "count": 2
+      },
+      {
+        "agent": "security-reviewer",
+        "count": 2
+      },
+      {
+        "agent": "architect",
+        "count": 1
+      },
+      {
+        "agent": "build-error-resolver",
+        "count": 1
+      },
+      {
+        "agent": "code-reviewer",
+        "count": 1
+      },
+      {
+        "agent": "code-simplifier",
+        "count": 1
+      },
+      {
         "agent": "cpp-build-resolver",
         "count": 1
       },
       {
         "agent": "cpp-reviewer",
-        "count": 1
-      },
-      {
-        "agent": "go-build-resolver",
-        "count": 1
-      },
-      {
-        "agent": "go-reviewer",
-        "count": 1
-      },
-      {
-        "agent": "kotlin-build-resolver",
-        "count": 1
-      },
-      {
-        "agent": "kotlin-reviewer",
-        "count": 1
-      },
-      {
-        "agent": "planner",
-        "count": 1
-      },
-      {
-        "agent": "python-reviewer",
         "count": 1
       }
     ],

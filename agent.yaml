@@ -29,6 +29,7 @@ skills:
   - bun-runtime
   - canary-watch
   - carrier-relationship-management
+  - chief-orchestrator
   - ck
   - claude-devfleet
   - click-path-audit
@@ -102,6 +103,7 @@ skills:
   - motion-ui
   - nanoclaw-repl
   - nextjs-turbopack
+  - night-shift
   - nutrient-document-processing
   - nuxt4-patterns
   - perl-patterns
@@ -160,6 +162,7 @@ commands:
   - auto-update
   - build-fix
   - checkpoint
+  - chief
   - code-review
   - cost-report
   - cpp-build
@@ -201,6 +204,7 @@ commands:
   - multi-frontend
   - multi-plan
   - multi-workflow
+  - night-shift
   - plan
   - plan-prd
   - pm2

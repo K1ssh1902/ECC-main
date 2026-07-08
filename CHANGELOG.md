@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `/night-shift` — autonomous orchestration mode: the orchestrator acts as a technical lead running an eight-step cycle (orient → select → contract → delegate → verify → judge → record → checkpoint) toward a long-term goal, with persistent `.night-shift/` state, a 13-category 0–100 scorecard, an impact priority ladder, and credit discipline. First mode on the extensible autonomous-mode architecture defined in `skills/night-shift/SKILL.md`.
+- `night-shift-assessor` agent — independent read-only repository auditor that scores the 13 night-shift categories with cited evidence and produces an impact-ranked backlog.
+- `night-shift` skill — judgment layer shared by future autonomous modes (`/research`, `/refactor`, `/security`, `/release`, `/performance`, `/debug`): state schemas, scoring rubric, verification standard, human-input policy.
+- Night-shift hardening audit (`docs/architecture/night-shift-audit.md`) — production-readiness pass: mid-session state reads eliminated from ORIENT, assessor cadence halved (phase change or every 10 cycles), fixed-column scorecard, failed-uncommitted-cycle recovery path, prompt-injection rail on the orchestrator, operative `--focus`, policy thresholds single-sourced in the skill.
+- `night-shift-doctor` (`scripts/night-shift-doctor.js`, `npm run night-shift:doctor`) — deterministic validate/status/metrics CLI over `.night-shift/` mission state: integrity invariants (contiguous journal, verdicts, score ranges), interrupted-cycle detection, and KPI computation (cycle duration, completion rate, improvement rate, flat-streak busy-loop detector); 11 tests in `tests/scripts/night-shift-doctor.test.js`. Protocol upgraded with crash-resume procedure, subagent/tool failure taxonomy, and journal timestamps (`docs/architecture/night-shift-production-readiness.md`).
+- Chief Orchestrator foundation — production architecture for the portfolio control plane above NightShift and future autonomous modes (`docs/CHIEF-ORCHESTRATOR-ARCHITECTURE.md`): layered stack (objectives → missions → tasks), state design at `~/.claude/orchestrator/`, read-only mission telemetry via doctor CLIs, chartering gate, supervision heuristics, scheduler runbook contract, decision record, and the five pre-implementation blockers (B1–B5). NightShift is untouched — integration is CLI-args (write) and doctor JSON (read) only.
+- `/chief` command + `chief-orchestrator` skill — operating protocol (intake, `--status`, `--supervise`, `--report`, `--wrap`, `--resume`) and judgment layer (mode registry, chartering gate, supervision heuristics table, executive report format, anti-patterns) for the Chief Orchestrator.
+- `orchestrator-doctor` (`scripts/orchestrator-doctor.js`, `npm run orchestrator:doctor`) — deterministic validate/status/metrics CLI over `~/.claude/orchestrator/` portfolio state: schema invariants, mission-registry consistency, one-running-mission-per-repo conflict detection, terminal-outcome and supervision-log checks; 13 tests in `tests/scripts/orchestrator-doctor.test.js`.
+- Chief Orchestrator ↔ NightShift integration certification (`docs/architecture/chief-orchestrator-integration-certification.md`) — **PASS WITH OBSERVATIONS**: 22 dynamic checks (11 fixture missions through the real doctor CLIs, supervision heuristics executed literally against captured JSON, 7-state lifecycle walk, failure injection incl. garbage state, state-dir-as-file, CRLF, no-state-after-dispatch), 10-row interface compatibility matrix, zero cross-references proven between subsystems, both doctors proven read-only. Four documentation fixes applied to CO-owned artifacts: field-level **Mode Doctor Contract**, "Not started" supervision row, runbook field wording, per-mode human-queue/handoff read points in the mode registry. Control Plane versioned **v1.0.0-rc.1**; NightShift untouched.
+
 ## 2.0.0-rc.1 - 2026-04-28
 
 ### Highlights

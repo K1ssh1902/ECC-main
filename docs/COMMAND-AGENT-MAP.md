@@ -19,6 +19,8 @@ This document lists each slash command and the primary agent(s) or skills it inv
 | `/harness-audit` | — | Harness scorecard (no single agent) |
 | `/loop-start` | loop-operator | Start autonomous loop |
 | `/loop-status` | loop-operator | Inspect loop status |
+| `/night-shift` | night-shift-assessor, planner, tdd-guide, code-reviewer, security-reviewer | Autonomous goal-driven orchestration mode |
+| `/chief` | — (dispatches modes, e.g. `/night-shift`) | Portfolio control plane via chief-orchestrator skill; distinct from the `chief-of-staff` agent (communication triage) |
 | `/quality-gate` | — | Quality pipeline (hook-like) |
 | `/model-route` | — | Model recommendation (no agent) |
 | `/orchestrate` | planner, tdd-guide, code-reviewer, security-reviewer, architect | Multi-agent handoff |

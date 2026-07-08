@@ -125,6 +125,8 @@
 
 | Command | What it does |
 |---------|-------------|
+| `/chief` | Chief Orchestrator — portfolio control plane: charter, dispatch, and supervise autonomous missions across repos |
+| `/night-shift` | Autonomous orchestration mode — plan, prioritize, delegate, verify toward a long-term goal |
 | `/loop-start` | Start a recurring agent loop on an interval |
 | `/loop-status` | Check status of running loops |
 | `/claw` | Start NanoClaw v2 — persistent REPL with model routing, skill hot-load, branching, and metrics |
@@ -156,4 +158,6 @@ Resuming next day?              → /resume-session
 Context getting heavy?          → /context-budget then /checkpoint
 Want to extract what you learned? → /learn-eval then /evolve
 Running repeated tasks?         → /loop-start
+Leaving it to work unattended?  → /night-shift <goal>
+Running several missions across repos? → /chief <objective>
 ```
