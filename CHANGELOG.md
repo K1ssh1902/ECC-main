@@ -8,6 +8,7 @@
 
 ### Added
 
+- Characterization test suite for `scripts/lib/shell-substitution.js` (55 tests / 69 assertions incl. hostile shell strings) — the parser gating `pre-bash-dev-server-block` and `gateguard-fact-force` hooks was previously untested. [night-shift cycle 002]
 - `/night-shift` — autonomous orchestration mode: the orchestrator acts as a technical lead running an eight-step cycle (orient → select → contract → delegate → verify → judge → record → checkpoint) toward a long-term goal, with persistent `.night-shift/` state, a 13-category 0–100 scorecard, an impact priority ladder, and credit discipline. First mode on the extensible autonomous-mode architecture defined in `skills/night-shift/SKILL.md`.
 - `night-shift-assessor` agent — independent read-only repository auditor that scores the 13 night-shift categories with cited evidence and produces an impact-ranked backlog.
 - `night-shift` skill — judgment layer shared by future autonomous modes (`/research`, `/refactor`, `/security`, `/release`, `/performance`, `/debug`): state schemas, scoring rubric, verification standard, human-input policy.

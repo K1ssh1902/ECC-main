@@ -6,7 +6,6 @@
 **Current phase:** improve
 
 ## Backlog (impact-ranked)
-- [ ] P2 test scripts/lib/shell-substitution.js (494 lines, pure parser, zero test imports repo-wide; guards two security hooks) — testing +5, security +3 — found c000 (assessor-confirmed genuinely untested)
 - [ ] P3 unit-test github-discussions.js pure functions (consumers import only the 2 query constants) — testing +3 — found c000
 - [ ] P3 extend harness-adapter-compliance coverage to its 6 unimported exports (renderStateTable, validateDocumentation …) — testing +2 — found c000
 - [ ] P4 small test for cursor-agent-names.js (26L, 2 exports, 2 real consumers) — testing +1 — found c000
@@ -15,7 +14,8 @@
 (none)
 
 ## Completed
-- [x] cycle 001 — KEPT — suite green on Windows: 4 EPERM symlink-fixture tests capability-guarded (testing 62→68, reliability 66→70, DX 71→73) — journal/cycle-001.md, this cycle's commit on night-shift/2026-07-09
+- [x] cycle 001 — KEPT — suite green on Windows: 4 EPERM symlink-fixture tests capability-guarded (testing 62→68, reliability 66→70, DX 71→73) — journal/cycle-001.md, commit 8b5e93c
+- [x] cycle 002 — KEPT — shell-substitution.js characterization suite: 55 tests incl. hostile inputs, mutation-proven (testing 68→73, security 70→73) — journal/cycle-002.md, this cycle's commit
 
 ## Blocked
 (none)
