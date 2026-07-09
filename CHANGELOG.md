@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Test suite is green on Windows without symlink privilege: the 4 broken-symlink fixture tests (tests/ci/validators.test.js, tests/lib/session-manager.test.js ×2, tests/lib/utils.test.js) now probe symlink capability and skip cleanly where unsupported, matching the existing in-repo guard precedent. [night-shift cycle 001]
+
 ### Added
 
 - `/night-shift` — autonomous orchestration mode: the orchestrator acts as a technical lead running an eight-step cycle (orient → select → contract → delegate → verify → judge → record → checkpoint) toward a long-term goal, with persistent `.night-shift/` state, a 13-category 0–100 scorecard, an impact priority ladder, and credit discipline. First mode on the extensible autonomous-mode architecture defined in `skills/night-shift/SKILL.md`.
