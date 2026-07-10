@@ -8,6 +8,7 @@
 
 ### Added
 
+- Coverage for the 6 previously-untested exports of `scripts/lib/harness-adapter-compliance.js` (12 new tests: state table rendering, documentation validation incl. failure paths) and a full unit suite for `scripts/lib/cursor-agent-names.js` (16 tests, characterizing its case-sensitive prefix and separator-normalization behavior). [night-shift cycle 004]
 - Unit test suite for `scripts/lib/github-discussions.js` (38 tests) — all 6 exported functions covered, including `fetchDiscussionSummary` end-to-end via the `ECC_GH_SHIM` idiom; characterizes case-sensitive maintainer-association matching and extra-path-segment repo parsing. [night-shift cycle 003]
 - Characterization test suite for `scripts/lib/shell-substitution.js` (55 tests / 69 assertions incl. hostile shell strings) — the parser gating `pre-bash-dev-server-block` and `gateguard-fact-force` hooks was previously untested. [night-shift cycle 002]
 - `/night-shift` — autonomous orchestration mode: the orchestrator acts as a technical lead running an eight-step cycle (orient → select → contract → delegate → verify → judge → record → checkpoint) toward a long-term goal, with persistent `.night-shift/` state, a 13-category 0–100 scorecard, an impact priority ladder, and credit discipline. First mode on the extensible autonomous-mode architecture defined in `skills/night-shift/SKILL.md`.
