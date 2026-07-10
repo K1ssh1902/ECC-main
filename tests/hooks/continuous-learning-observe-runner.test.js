@@ -17,6 +17,9 @@ const hooksJsonPath = path.join(repoRoot, 'hooks', 'hooks.json');
 const runWithFlagsPath = path.join(repoRoot, 'scripts', 'hooks', 'run-with-flags.js');
 const observeRunner = require(path.join(repoRoot, 'scripts', 'hooks', 'observe-runner.js'));
 
+const bashProbe = spawnSync('bash', ['-c', 'exit 0'], { stdio: 'ignore' });
+const hasWorkingBash = !bashProbe.error && bashProbe.status === 0;
+
 function test(name, fn) {
   try {
     fn();
@@ -155,6 +158,10 @@ function runTests() {
   })) passed++; else failed++;
 
   if (test('observe-runner invokes observe.sh with phase, stdin, and plugin root', () => {
+    if (!hasWorkingBash) {
+      console.log('    (skipped — working bash unavailable)');
+      return;
+    }
     withTempPluginRoot(tempRoot => {
       writeFakeObserveScript(tempRoot);
       const env = fs.existsSync('/bin/sh') ? { BASH: '/bin/sh' } : {};

@@ -19,6 +19,9 @@ const deterministicPackageEnv = {
   CLAUDE_CODE_PACKAGE_MANAGER: 'npm',
 };
 
+const bashProbe = spawnSync('bash', ['-c', 'exit 0'], { stdio: 'ignore' });
+const hasWorkingBash = !bashProbe.error && bashProbe.status === 0;
+
 function test(name, fn) {
   try {
     fn();
@@ -398,6 +401,10 @@ else failed++;
 
 if (
   test('sync installs the missing Codex baseline and accepts the legacy context7 MCP section', () => {
+    if (!hasWorkingBash) {
+      console.log('    (skipped — working bash unavailable)');
+      return;
+    }
     const homeDir = createTempDir('codex-sync-home-');
     const codexDir = path.join(homeDir, '.codex');
     const configPath = path.join(codexDir, 'config.toml');
@@ -473,6 +480,10 @@ else failed++;
 
 if (
   test('sync adds parent-table keys when the target only declares an implicit parent table', () => {
+    if (!hasWorkingBash) {
+      console.log('    (skipped — working bash unavailable)');
+      return;
+    }
     const homeDir = createTempDir('codex-sync-implicit-parent-home-');
     const codexDir = path.join(homeDir, '.codex');
     const configPath = path.join(codexDir, 'config.toml');

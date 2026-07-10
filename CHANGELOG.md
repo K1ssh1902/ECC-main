@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Test suite no longer depends on which `bash` the session PATH resolves: the 5 tests requiring a working bash (tests/scripts/codex-hooks.test.js ×2, tests/hooks/continuous-learning-observe-runner.test.js, tests/hooks/plugin-hook-bootstrap.test.js, tests/scripts/orchestrate-codex-worker.test.js) probe bash capability first and skip cleanly where it is broken (e.g. Windows' System32 WSL relay without a distro), mirroring the symlink-capability guard precedent. [night-shift cycle 005]
 - Test suite is green on Windows without symlink privilege: the 4 broken-symlink fixture tests (tests/ci/validators.test.js, tests/lib/session-manager.test.js ×2, tests/lib/utils.test.js) now probe symlink capability and skip cleanly where unsupported, matching the existing in-repo guard precedent. [night-shift cycle 001]
 
 ### Added

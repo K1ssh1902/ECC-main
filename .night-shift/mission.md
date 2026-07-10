@@ -6,7 +6,7 @@
 **Current phase:** improve
 
 ## Backlog (impact-ranked)
-- [ ] P5 guard the 5 bash-dependent test files behind a bash-capability probe (c001 precedent) — reliability +2, DX +1 — found c003 (PowerShell sessions resolve `bash` to WSL's broken System32 stub → 5 hard fails; green under Git Bash)
+(empty — cleared through c005)
 
 ## In Progress
 (none)
@@ -15,12 +15,14 @@
 - [x] cycle 001 — KEPT — suite green on Windows: 4 EPERM symlink-fixture tests capability-guarded (testing 62→68, reliability 66→70, DX 71→73) — journal/cycle-001.md, commit 8b5e93c
 - [x] cycle 002 — KEPT — shell-substitution.js characterization suite: 55 tests incl. hostile inputs, mutation-proven (testing 68→73, security 70→73) — journal/cycle-002.md, commit 2d4591c
 - [x] cycle 003 — KEPT — github-discussions.js unit suite: 38 tests, all 6 exported functions incl. ECC_GH_SHIM-driven fetch path, mutation-proven (testing 73→75) — journal/cycle-003.md, commit 61d2180
-- [x] cycle 004 — KEPT — batched: harness-adapter-compliance 6 remaining exports (12 tests) + cursor-agent-names suite (16 tests), both mutation-proven; c000 coverage-gap backlog fully cleared (testing 75→77) — journal/cycle-004.md, this cycle's commit
+- [x] cycle 004 — KEPT — batched: harness-adapter-compliance 6 remaining exports (12 tests) + cursor-agent-names suite (16 tests), both mutation-proven; c000 coverage-gap backlog fully cleared (testing 75→77) — journal/cycle-004.md, commit 3baea0b
+- [x] cycle 005 — KEPT — 5 bash-requiring tests across 4 files guarded behind a working-bash capability probe; suite green in both PowerShell (broken WSL bash) and Git Bash except operator-dir failures (reliability 70→72, DX 73→74) — journal/cycle-005.md, this cycle's commit
 
 ## Blocked
 (none)
 
 ## Tech Debt Register
+- tests/ci/no-personal-paths.test.js "passes against the real repository" runs the validator with a hard 10s execFileSync timeout — flaked once under full-suite disk contention (c005, did not reproduce on retry or standalone); consider raising the timeout or exempting the real-repo test from it. — found c005
 - toCursorAgentFileName (scripts/lib/cursor-agent-names.js) does no sanitization and its `ecc-` prefix check is case-sensitive: 'ECC-Agent.md' → 'ecc-ECC-Agent.md' (double prefix); falsy input passes through unchanged. Characterized in c004 tests, not fixed — changing it is a public-contract change (2 install-path consumers), out of mission scope. — found c004
 - scripts/lib/install-lifecycle.js is 1226L, breaching the repo's own 800L cap (install-executor.js 738L trending) — split mission candidate, out of this mission's scope (contract risk) — found c000 (assessor)
 - Coverage (c8) runs only on ubuntu in CI (.github/workflows/ci.yml:212-219) — Windows-skipped tests silently drop from measured coverage — note only — found c000

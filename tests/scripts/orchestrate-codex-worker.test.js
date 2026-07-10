@@ -8,6 +8,9 @@ const { spawnSync } = require('child_process');
 
 const SCRIPT = path.join(__dirname, '..', '..', 'scripts', 'orchestrate-codex-worker.sh');
 
+const bashProbe = spawnSync('bash', ['-c', 'exit 0'], { stdio: 'ignore' });
+const hasWorkingBash = !bashProbe.error && bashProbe.status === 0;
+
 console.log('=== Testing orchestrate-codex-worker.sh ===\n');
 
 let passed = 0;
@@ -25,6 +28,10 @@ function test(desc, fn) {
 }
 
 test('fails fast for an unreadable task file and records failure artifacts', () => {
+  if (!hasWorkingBash) {
+    console.log('    (skipped — working bash unavailable)');
+    return;
+  }
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ecc-orch-worker-'));
   const handoffFile = path.join(tempRoot, '.orchestration', 'docs', 'handoff.md');
   const statusFile = path.join(tempRoot, '.orchestration', 'docs', 'status.md');
