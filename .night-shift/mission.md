@@ -6,16 +6,17 @@
 **Current phase:** improve
 
 ## Backlog (impact-ranked)
-- [ ] P3 unit-test github-discussions.js pure functions (consumers import only the 2 query constants) — testing +3 — found c000
 - [ ] P3 extend harness-adapter-compliance coverage to its 6 unimported exports (renderStateTable, validateDocumentation …) — testing +2 — found c000
-- [ ] P4 small test for cursor-agent-names.js (26L, 2 exports, 2 real consumers) — testing +1 — found c000
+- [ ] P4 small test for cursor-agent-names.js (26L, 2 exports, 2 real consumers) — testing +1 — found c000 (below floor alone; batch with the item above per batch-trivia rule)
+- [ ] P5 guard the 5 bash-dependent test files behind a bash-capability probe (c001 precedent) — reliability +2, DX +1 — found c003 (PowerShell sessions resolve `bash` to WSL's broken System32 stub → 5 hard fails; green under Git Bash)
 
 ## In Progress
 (none)
 
 ## Completed
 - [x] cycle 001 — KEPT — suite green on Windows: 4 EPERM symlink-fixture tests capability-guarded (testing 62→68, reliability 66→70, DX 71→73) — journal/cycle-001.md, commit 8b5e93c
-- [x] cycle 002 — KEPT — shell-substitution.js characterization suite: 55 tests incl. hostile inputs, mutation-proven (testing 68→73, security 70→73) — journal/cycle-002.md, this cycle's commit
+- [x] cycle 002 — KEPT — shell-substitution.js characterization suite: 55 tests incl. hostile inputs, mutation-proven (testing 68→73, security 70→73) — journal/cycle-002.md, commit 2d4591c
+- [x] cycle 003 — KEPT — github-discussions.js unit suite: 38 tests, all 6 exported functions incl. ECC_GH_SHIM-driven fetch path, mutation-proven (testing 73→75) — journal/cycle-003.md, this cycle's commit
 
 ## Blocked
 (none)
@@ -26,7 +27,8 @@
 - CORRECTED c000: cursor-agent-names.js is NOT dead code — 2 consumers (scripts/lib/install-executor.js:6, scripts/lib/install-targets/cursor-project.js:4); the cycle-000 zero-consumer claim used a grep pattern that missed relative requires. Deleting it would break installs.
 
 ## Needs Human
-(none yet)
+- Untracked `.agents/skills/source-command-*` dirs (pre-existing, operator-generated) fail 2 Codex-surface tests: SKILL.md `name:` values are quoted strings and `agents/openai.yaml` is missing — tests/ci/codex-skill-surface.test.js is correctly rejecting an invalid Codex surface. Unblocks: full-suite exit 0. Options: fix the generated frontmatter + add openai.yaml, regenerate, or delete the dirs. Out of mission scope (untracked operator territory per c000 decision log). — found c003
+- Session-environment: PowerShell sessions on this machine resolve `bash` to C:\Windows\system32\bash.exe (WSL relay, no /bin/bash installed) → 5 bash-dependent tests hard-fail outside Git Bash. Machine-level fix (install a WSL distro or reorder PATH); repo-level mitigation queued as the P5 backlog item. — found c003
 
 ## Decision Log
 - cycle 000: Mission dispatched under an operator exception scoped to protocol-produced commits on this branch only (no merge, no push, no history rewriting). `tests/fixtures/mode-doctor-captures/` (M2 doctor-JSON captures, pre-existing untracked evidence for M3) is deliberately excluded from cycle commits — cycle commits add their own paths explicitly; the operator commits the captures separately.
