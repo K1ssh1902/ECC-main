@@ -18,7 +18,7 @@ Assessed: baseline c000 (2026-07-09); wrap-up audit c005 (2026-07-10, performed 
 | User experience | 62 | 62 | 62 | Operator CLI surface: npx ecc + postinstall guidance (package.json:328), install.sh/install.ps1, doctor/status dashboards; uninstall supports dry-run (tests/scripts/uninstall.test.js — passed in wrap-up runs) |
 | UI consistency | n/a | n/a | n/a | CLI/toolkit repo — no GUI product surface in mission scope (terminal output only; ecc_dashboard.py is ancillary and out of goal) |
 | Accessibility | n/a | n/a | n/a | No UI surface to assess (same evidence as UI consistency) |
-| **Overall (mean)** | **68** | **71** | **71** | Mean of 11 scored categories (777/11 = 70.6 after c005); n/a rows excluded |
+| **Overall (mean)** | 68 | 71 | 71 | Mean of 11 scored categories (777/11 = 70.6 after c005); n/a rows excluded — values unbolded per skill template so night-shift-doctor's Number() cell parse reads them |
 
 ## Suite run capture (wrap-up, c005)
 
