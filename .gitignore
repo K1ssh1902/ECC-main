@@ -103,3 +103,10 @@ assets/images/security/badrudi-exploit.mp4
 
 # Playwright MCP session output (snapshots, screenshots)
 .playwright-mcp/
+
+# oh-my-claudecode per-machine session state
+.omc/
+
+# Temp files from tests/ci/validators.test.js; its finally-block cleanup
+# is skipped when a run is killed rather than failing
+.tmp-validator-*.js
