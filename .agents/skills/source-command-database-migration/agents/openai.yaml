@@ -1,0 +1,6 @@
+interface:
+  display_name: "Database Migration"
+  short_description: "Plan schema changes with safe migration files"
+  default_prompt: "Use $source-command-database-migration to plan a database schema migration."
+policy:
+  allow_implicit_invocation: true

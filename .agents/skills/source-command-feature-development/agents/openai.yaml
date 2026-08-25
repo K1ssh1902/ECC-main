@@ -1,0 +1,6 @@
+interface:
+  display_name: "Feature Development"
+  short_description: "Standard feature implementation workflow for ECC"
+  default_prompt: "Use $source-command-feature-development to implement a feature end to end."
+policy:
+  allow_implicit_invocation: true
