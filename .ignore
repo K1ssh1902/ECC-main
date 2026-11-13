@@ -1,0 +1,12 @@
+# Keeps agent searches out of bulk content. Explicit paths still search these.
+docs/ja-JP/
+docs/zh-CN/
+docs/zh-TW/
+docs/ko-KR/
+docs/pt-BR/
+docs/tr/
+docs/de-DE/
+docs/ru/
+docs/th/
+docs/vi-VN/
+devcoucou/

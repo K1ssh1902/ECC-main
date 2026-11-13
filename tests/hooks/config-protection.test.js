@@ -283,7 +283,7 @@ function runTests() {
 
   if (
     test('legacy hooks do not echo raw input when they fail without stdout', () => {
-      const pluginRoot = path.join(__dirname, '..', `tmp-runner-plugin-${Date.now()}`);
+      const pluginRoot = path.join(os.tmpdir(), `ecc-runner-plugin-${Date.now()}`);
       const scriptDir = path.join(pluginRoot, 'scripts', 'hooks');
       const scriptPath = path.join(scriptDir, 'legacy-block.js');
 
