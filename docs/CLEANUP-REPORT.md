@@ -7,8 +7,8 @@ the token cost is not in repository files at all. It comes from what is installe
 hooked into every session, and those fixes are laid out step by step in
 [CLEANUP-PLAN.md](CLEANUP-PLAN.md).
 
-Audited on branch `night-shift/2026-07-09`. Nothing was committed or pushed, and nothing
-outside this repository was changed.
+Audited on branch `night-shift/2026-07-09` on 2026-11-12. The plan has since been carried
+out; the "Execution record" section at the end gives the current state.
 
 ## Naming note
 
@@ -98,8 +98,8 @@ v4, with a new section, "The Minimum Bar, per model":
 - Existing em-dashes were replaced with other punctuation so the whole file is free of them.
 
 Cost to know about: the file grew from 6,356 to 11,405 bytes, about 1,260 more tokens per
-session once installed. It is not installed yet. The copy that sessions load lives at
-`~/.claude/rules/ecc/common/legacy.md` and still holds v3 (plan step 2).
+session. It was installed to `~/.claude/rules/ecc/common/legacy.md` on 2026-11-13 (plan
+step 2), so sessions started after that should load v4.
 
 ## Model names
 
@@ -124,12 +124,11 @@ A model whose exact version is not listed follows its family's section.
 
 ## Rollback
 
-Everything removed from git can be restored until the change is committed (command not
-executed in this session):
+The removals are in commit `55d0282`. To bring the removed files back, restore them from
+that commit's parent (command not executed):
 
 ```bash
-git restore --source=HEAD --staged --worktree .kiro tests/tmp-runner-plugin-1783274815478 \
-  tests/ci/agent-instruction-safety.test.js docs/WORKSPACE-MAP.md rules/common/legacy.md
+git checkout 55d0282~1 -- .kiro tests/tmp-runner-plugin-1783274815478
 ```
 
 The ignored temp file and the empty `.playwright/` folder are not recoverable and do not
@@ -152,3 +151,43 @@ Run after every change in this report was in place.
 
 Not run: `npm run lint` across the whole repo, and `npm test` as a single command, which
 stops at the unicode-safety step for the pre-existing reasons described above.
+
+## Execution record
+
+The plan in [CLEANUP-PLAN.md](CLEANUP-PLAN.md) was carried out on 2026-11-12 and
+2026-11-13, and checked again on 2026-11-15 in a fresh session. The work is on branch
+`chore/cleanup-2026-11-12`. It is not merged and not pushed.
+
+| Step | Outcome | How it was checked |
+|---|---|---|
+| 1. Commit | Done. Commits `55d0282`, `fc56159`, `f28bb57`, then `da8b199` and `0424b4d` for steps 6 and 12. No co-author line. | `git log` |
+| 2. Install legacy v4 | Done. | The installed copy matches the repo file (`diff` clean). Not yet confirmed by reading a new session's loaded rules. |
+| 3. Stale hook path | Done. Both paths in the global Write and Edit hook now point at `Proyectos/ECC-main`. | The hook path check prints no `MISSING` line. |
+| 4. Duplicate injection | Done. `OMC_SKIP_HOOKS` is set in `.claude/settings.json`. | In a new session, tool results carry no plugin reminder line and no injected rule block. |
+| 5. Web rules scoped | Done and installed. | `validate-rules` passes and the installed copies match the repo files. Not yet confirmed that a new non-web session skips them. |
+| 6. Park unused agents | Done. 20 agents moved to `~/claude-disabled/agents/`; 44 remain installed. The install record no longer lists the 20, so doctor stays clean. | `node scripts/doctor.js --target claude` reports OK. |
+| 7. Reinstall skills | Done. Profile `developer` plus the 56 previously selected skills: 141 skill folders, down from 253. | `list-installed` shows profile `developer`; doctor OK. |
+| 8. Search hygiene | Done. `.ignore` and `.graphifyignore` added. | Graph rebuilt at 12,524 nodes, down from 34,709. |
+| 9. Nested projects | `devcoucou/` moved to `C:\dev\devcoucou`, clean at `341b86a`. `claude-code-automation/` kept. | `git status` no longer lists it. |
+| 10. Prompt Defense block | Done. Removed from the two `.claude/rules/` files; `CLAUDE.md` keeps it. | Harness audit still 80/80. |
+| 11. Temp-file leaks | The config-protection test now uses the system temp folder. The validator temp copy stays in the repo on purpose: a comment in `tests/ci/validators.test.js` says it must sit there so `require()` can resolve `node_modules`. The `.gitignore` rule covers it. | `node tests/hooks/config-protection.test.js`: 8 passed, nothing left behind. |
+| 12. Model guidance | Done and installed. `rules/common/performance.md` names Haiku 5.5, Sonnet 5.5, Opus 5.5 and Fable 5.2. | `validate-rules` passes. |
+| 13. Final verification | `node tests/run-all.js`: 2737 passed, 0 failed. Harness audit 80/80. | Run on 2026-11-13 after all steps. |
+
+Still open, all for the owner:
+
+- Merge or push `chore/cleanup-2026-11-12`.
+- `.gitignore`, `CLAUDE.md`, `mcp-configs/mcp-servers.json` and `.claude/settings.json`
+  were uncommitted before this work and still are.
+- The `ponytail` plugin is registered under the repository's old folder path. Check
+  `/plugin` to see whether it is active.
+- The graphify guard still adds a line to every Bash, Grep, Read and Glob call. It was
+  left in place because it was added on purpose.
+- `node scripts/ci/check-unicode-safety.js` still exits 1, now with 76 findings: 65 emoji
+  in program docs, a byte-order mark in three fixtures, and 8 inside the ignored
+  `graphify-out/` folder. Moving `devcoucou/` removed 23.
+- `C:\dev\coucou` and `C:\dev\devcoucou` are two clones of the same remote at different
+  commits. Keep one.
+- Rollback material can be deleted once the new setup has proven itself:
+  `~/claude-disabled/` (parked agents, the old skills folder, two earlier install
+  records) and `~/.claude/settings.json.bak-2026-11-12`.

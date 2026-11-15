@@ -4,9 +4,12 @@ A step-by-step plan for an Opus session to finish the efficiency cleanup started
 2026-11-12. Findings and evidence are in [CLEANUP-REPORT.md](CLEANUP-REPORT.md); the
 finding IDs (T1 to T8) used below come from that report.
 
-The request named "Opus "5.5" as the executor. That is not a model name that could be
-verified, so nothing here depends on the version: any Opus model can run it, and every
-step is checklist-shaped enough for Sonnet too.
+Written for Opus 5.5 as the executor. Nothing here depends on the version: any Opus
+model can run it, and every step is checklist-shaped enough for Sonnet too.
+
+**Status:** executed on 2026-11-12 and 2026-11-13. The outcome of each step is in the
+"Execution record" section of the report. This file is kept as the record of what each
+step did and how to roll it back.
 
 ## Ground rules
 
