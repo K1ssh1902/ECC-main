@@ -24,14 +24,15 @@ jobs:
 
     strategy:
       fail-fast: false
+      # Two lanes (Linux + Windows, Node 20, npm) instead of the upstream
+      # 33-job grid of 3 OS x 3 Node x 4 package managers, which is sized for
+      # a public project with free CI minutes. To widen coverage, add values
+      # back here; the setup steps below still handle pnpm, yarn and bun.
+      # If bun returns, also restore the windows-latest + bun exclude.
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node: ['18.x', '20.x', '22.x']
-        pm: [npm, pnpm, yarn, bun]
-        exclude:
-          # Bun has limited Windows support
-          - os: windows-latest
-            pm: bun
+        os: [ubuntu-latest, windows-latest]
+        node: ['20.x']
+        pm: [npm]
 
     steps:
       - name: Checkout
