@@ -1,0 +1,12 @@
+﻿{
+  "cycles": 5,
+  "closedCycles": 5,
+  "kept": 5,
+  "reverted": 0,
+  "completionRate": 1,
+  "overallDelta": 3,
+  "improvementPerCycle": 0.6,
+  "avgCycleMinutes": 24,
+  "flatTrailingCycles": 0,
+  "needsHumanQueued": 2
+}

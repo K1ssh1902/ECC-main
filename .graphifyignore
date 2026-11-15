@@ -1,0 +1,15 @@
+# Keeps the knowledge graph focused on source, not translations or adapter copies.
+docs/ja-JP/
+docs/zh-CN/
+docs/zh-TW/
+docs/ko-KR/
+docs/pt-BR/
+docs/tr/
+docs/de-DE/
+docs/ru/
+docs/th/
+docs/vi-VN/
+devcoucou/
+.agents/
+.cursor/
+.opencode/

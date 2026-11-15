@@ -137,8 +137,15 @@ Queue, don't block: anything needing the user goes to `## Needs Human` in `missi
 ### Needs Human
 - <queued questions / blocked items with context>
 
+### Review handoff
+- Branch `night-shift/<YYYY-MM-DD>`, N commits ahead of `<base branch>`
+- Proposed PR title and a 3–5 line summary a reviewer can read cold
+- To submit for review, a human runs: `git push -u origin night-shift/<YYYY-MM-DD>` then `gh pr create --base <base branch> --fill`
+
 ### Recommended next mission
 - <top 3 highest-impact items left in the backlog>
 ```
 
 Write it to `mission.md` under `## Handoff` and deliver it to the user as the closing message.
+
+The mission ends on a local branch and never pushes (Safety Rails). Mission work reaches the base branch through a pull request that a human opens from the Review handoff, which is the step that runs CI and any automated PR review the project has set up. Fill that section in on every wrap-up, including when the project has no remote yet.

@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "problems": [
+    {
+      "severity": "error",
+      "code": "E_MISSION_FILE_MISSING",
+      "message": "portfolio mission \"ecc-main--night-shift--2026-07-09\" has no missions/ecc-main--night-shift--2026-07-09.md file"
+    }
+  ]
+}

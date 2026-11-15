@@ -1,0 +1,17 @@
+﻿{
+  "goal": "Raise test coverage of scripts/lib in ECC-main — add tests for uncovered scripts/lib modules, keeping all existing suites green; do not change public contracts or any doctor's JSON surface.",
+  "phase": "improve",
+  "cycles": 5,
+  "lastCycle": {
+    "name": "cycle-005.md",
+    "verdict": "KEPT"
+  },
+  "openCycle": false,
+  "backlog": 0,
+  "blocked": 0,
+  "needsHuman": 2,
+  "overall": {
+    "baseline": 68,
+    "now": 71
+  }
+}

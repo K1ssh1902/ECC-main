@@ -1,0 +1,6 @@
+interface:
+  display_name: "Add Language Rules"
+  short_description: "Add a new language pack to the ECC rules system"
+  default_prompt: "Use $source-command-add-language-rules to add a new language to the rules system."
+policy:
+  allow_implicit_invocation: true

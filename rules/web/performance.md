@@ -1,3 +1,14 @@
+---
+paths:
+  - "**/*.html"
+  - "**/*.css"
+  - "**/*.scss"
+  - "**/*.tsx"
+  - "**/*.jsx"
+  - "**/*.vue"
+  - "**/*.svelte"
+  - "**/*.astro"
+---
 > This file extends [common/performance.md](../common/performance.md) with web-specific performance content.
 
 # Web Performance Rules

@@ -12,6 +12,9 @@ const { spawnSync } = require('child_process');
 
 const SCRIPT = path.join(__dirname, '..', '..', 'scripts', 'hooks', 'plugin-hook-bootstrap.js');
 
+const bashProbe = spawnSync('bash', ['-c', 'exit 0'], { stdio: 'ignore' });
+const hasWorkingBash = !bashProbe.error && bashProbe.status === 0;
+
 function createTempDir() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'plugin-hook-bootstrap-'));
 }
@@ -159,6 +162,10 @@ process.exit(7);
   })) passed++; else failed++;
 
   if (test('shell mode runs target script through an available shell', () => {
+    if (!hasWorkingBash) {
+      console.log('    (skipped — working bash unavailable)');
+      return;
+    }
     const root = createTempDir();
     try {
       writeFile(root, path.join('scripts', 'hook.sh'), [

@@ -53,7 +53,6 @@ delete one if you're certain you'll never use that tool.
 | `.agents/` | Generic cross-tool agent catalog (includes `openai.yaml` per skill). |
 | `.codex/` | OpenAI Codex CLI adapter. |
 | `.cursor/` | Cursor IDE adapter. |
-| `.kiro/` | AWS Kiro adapter (agents, steering, hooks). |
 | `.opencode/` | OpenCode engine adapter (has its own `node_modules` — gitignored). |
 | `.vscode/` | VS Code editor settings (one `settings.json`). |
 | `.github/` | GitHub Actions CI workflows for this repo. |

@@ -2,11 +2,17 @@
   "mcpServers": {
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github@2025.4.8"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github@2025.4.8"
+      ]
     },
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@2.1.4"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@2.1.4"
+      ]
     },
     "exa": {
       "type": "http",
@@ -14,15 +20,35 @@
     },
     "memory": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory@2026.1.26"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory@2026.1.26"
+      ]
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@0.0.69", "--extension"]
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.69",
+        "--browser",
+        "chrome"
+      ]
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@2025.12.18"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking@2025.12.18"
+      ]
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "C:/Users/Dell/AppData/Roaming/npm/node_modules/shadcn/dist/index.js",
+        "mcp"
+      ],
+      "env": {}
     }
   }
 }
